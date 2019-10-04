@@ -20,37 +20,78 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#"><b>HPE LAB</b></a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="http://172.30.5.51">Simplivity Lab</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#reviews">Reviews</a>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container"> <a class="navbar-brand" href="#"><img src="img/logo.png" width="80" height="22" class="d-inline-block align-center" alt="">
+        <i class="fa d-inline"></i>
+        <b> HPE LAB</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar10">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="https://hpe.com">HPE.com</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://www.hpe.com/us/en/storage.html">Storages</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://www.hpe.com/us/en/servers.html">Servers</a> </li>
+          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lab Accesses</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> <a class="dropdown-item" href="https://172.30.5.51">Simplivity Lab</a><a class="dropdown-item" href="https://172.30.4.20">Nimble Array</a><a class="dropdown-item" href="https://172.30.12.22">Nimble dHCI Lab</a><a class="dropdown-item" href="https://172.30.4.26">RMC Lab</a><a class="dropdown-item" href="https://172.30.4.1">StoreOnce VSA</a></div>
           </li>
         </ul>
-        <a class="btn navbar-btn mx-2 btn-primary shadowed" href="#download">Download</a>
       </div>
     </div>
   </nav>
   <!-- Cover -->
-  <div style="	background-image: url('img/Primera-M.jpg');	background-position: center;	background-size: 100%;	background-repeat: repeat;" class="section pt-5">
-    <div class="container mt-5 pt-5">
+  <div class="py-5 text-center text-md-left" style="	background-image: url(img/bg.jpg);	background-position: right bottom;	background-size: cover;	background-repeat: repeat;	background-attachment: fixed;">
+    <div class="container">
       <div class="row">
-        <div class="col-md-6 my-5 text-lg-left text-center align-self-center">
-          <h1 class="display-3">WELCOME</h1>
-          <h1 contenteditable="true">TO HPE Automation Lab</h1>
-          <div class="row mt-5">
-            <div class="col-6 col-lg-12 text-left">
-              <h5 class="">Createby: Warot A&nbsp; -&nbsp; As of&nbsp; 04 October 2019<br></h5>
-            </div>
-          </div>
+        <div class="p-5 mx-auto mx-md-0 ml-md-auto col-7 col-md-9">
+          <h3 class="display-4">WELCOME TO HPE LAB </h3>
+          <p class="mb-3 lead">This is a demonstration for end to end provisioning demo with HPE and Ansible. This lab will show you how can we provision from Infrastructure level to application level. </p>
+          <form class="form-inline d-flex justify-content-end">
+          </form>
+          <div class="input-group-append">@Warot Asawa&nbsp; - As of 04 October 2019</div>
         </div>
-        <div class="col-6"></div>
+        <div class="col-md-3 col-5"></div>
+      </div>
+      <div class="row">
+      </div>
+    </div>
+  </div>
+  <div class="py-3 text-center" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>Fully Automated</h1>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4 p-4"> <i class="d-block fa fa-3x mb-2 text-muted fa-database"></i>
+          <h4>Infrastructure</h4>
+          <p>With HPE Nimble Storage and Ansinimble roles. You can simple provision volume from nimble array and mount to your host easily. </p>
+        </div>
+        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-3x mb-2 text-muted fa-cubes"></i>
+          <h4 style="">Environment</h4>
+          <p>With automation, you can setup Python , Apache server, or any other environment for your apps in few seconds. </p>
+        </div>
+        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-3x mb-2 text-muted fa-github-alt"></i>
+          <h4>Application</h4>
+          <p>Application deployment has never been easier when you can pull new code from Git server and run the app in one steps. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="px-lg-5 d-flex flex-column justify-content-center col-lg-6">
+          <h1>Full Stack deployment</h1>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">1. Create Volume on Nimble Array</li>
+            <li class="list-group-item">2. Automatic mount and create volume on hosts</li>
+            <li class="list-group-item"> 3. Setup environment by install all required packages</li>
+            <li class="list-group-item"> 4. Deply application from GitHub</li>
+          </ul>
+        </div>
+        <div class="col-lg-6"> <img class="img-fluid d-block" src="img/Diagram.png"> </div>
       </div>
     </div>
   </div>
