@@ -1,0 +1,67 @@
+pipeline {
+   agent { label 'dev-node'}
+
+   stages {
+      stage('Prepare Test') {
+         steps {
+            dir('/root/dev/AnsibleWebPage') {
+                echo "Git Check out to Branch: dev"
+                sh "git checkout dev"
+                echo "Pull latest code from WarotAsawa/AnsibleWebPage Branch: dev"
+                sh "git pull"
+            }
+         }
+      }
+      stage('Builing Test') {
+         steps {
+            dir('/root/dev/AnsibleWebPage') {
+                echo "Building temp docker image"
+                sh "docker build -t temp-frond-end ."
+            }
+         }
+      }
+      stage('Run and Test') {
+         steps {
+            dir('/root/dev/AnsibleWebPage') {
+                echo "Running temp docker image with port 8888"
+                sh "docker run --name tempweb -d -p 8888:80 temp-front-end"
+                retry(3) {
+                    echo "Test web connectivity"
+                    sh "curl -I 172.30.5.133:8888"
+                }
+                echo "Test Pass. Cleaning up containers"
+                sh "docker stop tempweb"
+                sh "docker rm tempweb"
+            }
+         }
+      }
+      stage('Build and Push Production') {
+         steps {
+            dir('/root/dev/AnsibleWebPage') {
+                echo "Merge to master and push"
+                sh "git checkout master"
+                sh "git merge dev"
+                sh "git push"
+                echo "Checkout git back to dev branch"
+                sh "git checkout dev"
+                echo "Building production docker image"
+                sh "docker build -t front-cover-web ."
+                echo "Tagging image and push to docker.hub"
+                sh "docker tag front-cover-web:latest asawakow/front-cover-web:latest"
+                sh "docker push asawakow/front-cover-web:latest"
+            }
+         }
+      }
+      stage('Deploy Production on k8s') {
+         steps {
+            dir('/root/dev/AnsibleWebPage/kubectl/prod') {
+                echo "Re-deployging Web-App"
+                sh "kubectl delete -f deploy-webexample.yaml"
+                sh "kubectl apply -f deploy-webexample.yaml"
+                echo "Applying Services"
+                sh "kubectl apply -f svc-webexample.yaml"
+            }
+         }
+      }
+   }
+}
