@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>HPE LAB Web App</title>
+  <meta name="description" content="For automation Test only.">
+  <meta name="keywords" content="HPE Automation">
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="neon.css">
+  <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+  <script src="js/navbar-ontop.js"></script>
+  <!-- Script: Animated entrance -->
+  <script src="js/animate-in.js"></script>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container"> <a class="navbar-brand" href="#"><img src="img/logo.png" width="80" height="22" class="d-inline-block align-center" alt="">
+        <i class="fa d-inline"></i>
+        <b> HPE LAB</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar10">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="https://hpe.com">HPE.com</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://www.hpe.com/us/en/storage.html">Storages</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://www.hpe.com/us/en/servers.html">Servers</a> </li>
+          <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lab Accesses</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> <a class="dropdown-item" href="https://172.30.5.51">Simplivity Lab</a><a class="dropdown-item" href="https://172.30.4.20">Nimble Array</a><a class="dropdown-item" href="https://172.30.12.22">Nimble dHCI Lab</a><a class="dropdown-item" href="https://172.30.4.26">RMC Lab</a><a class="dropdown-item" href="https://172.30.4.1">StoreOnce VSA</a></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Cover -->
+  <div class="py-5 text-center text-md-left" style="	background-image: url(img/bg.jpg);	background-position: right bottom;	background-size: cover;	background-repeat: repeat;	background-attachment: fixed;">
+    <div class="container">
+      <div class="row">
+        <div class="p-5 mx-auto mx-md-0 ml-md-auto col-7 col-md-9">
+          <h3 class="display-4">WELCOME TO HPE LAB </h3>
+          <p class="mb-3 lead">This is a demonstration for end to end provisioning demo with HPE and Ansible. This lab will show you how can we provision from Infrastructure level to application level. </p>
+          <form class="form-inline d-flex justify-content-end">
+          </form>
+          <div class="input-group-append">@Warot Asawa&nbsp; - As of 12th JUNE 2020</div>
+        </div>
+        <div class="col-md-3 col-5"></div>
+      </div>
+      <div class="row">
+      </div>
+    </div>
+  </div>
+  <div class="py-3 text-center" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>Fully Automated</h1>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4 p-4"> <i class="d-block fa fa-3x mb-2 text-muted fa-database"></i>
+          <h4>Infrastructure</h4>
+          <p>With HPE Nimble Storage and Ansinimble roles. You can simple provision volume from nimble array and mount to your host easily. </p>
+        </div>
+        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-3x mb-2 text-muted fa-cubes"></i>
+          <h4 style="">Environment</h4>
+          <p>With automation, you can setup Python , Apache server, or any other environment for your apps in few seconds. </p>
+        </div>
+        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-3x mb-2 text-muted fa-github-alt"></i>
+          <h4>Application</h4>
+          <p>Application deployment has never been easier when you can pull new code from Git server and run the app in one steps. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="px-lg-5 d-flex flex-column justify-content-center col-lg-6">
+          <h1>Full Stack deployment</h1>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">1. Create Volume on Nimble Array</li>
+            <li class="list-group-item">2. Automatic mount and create volume on hosts</li>
+            <li class="list-group-item"> 3. Setup environment by install all required packages</li>
+            <li class="list-group-item"> 4. Deply application from GitHub</li>
+          </ul>
+        </div>
+        <div class="col-lg-6"> <img class="img-fluid d-block" src="img/Diagram.png"> </div>
+      </div>
+    </div>
+  </div>
+  <!-- Article style section -->
+  <div class="py-5 bg-dark" style="	background-image: url(img/bgdark.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+    <div class="container">
+      <div class="row py-5">
+        <div class="col-md-5 order-2 order-md-1 animate-in-left">
+          <img class="img-fluid d-block my-3 mx-auto" src="img/nimble.png" width="auto
+auto"> </div>
+        <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
+          <h2>HPE NIMBLE STORAGE </h2>
+          <h6>Intelligent, self-managing flash storage in the data center and cloud. tomorrow. Protect your data everywhere, every day with end-to-end assurance that’s standard on every all-flash system. </h6>
+          <a class="btn btn-outline-primary" href="https://www.hpe.com/us/en/storage/nimble.html">Learn more</a>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="align-self-center col-lg-7 text-md-left text-center">
+          <h2>HPE Primera</h2>
+          <h5 contenteditable="true">Mission-Critical redefined. Experience your super resilient system with simplicity and agility of cloud.</h5><a class="btn btn-outline-primary" href="https://www.hpe.com/us/en/storage/hpe-primera.html">Learn more</a>
+        </div>
+        <div class="align-self-center animate-in-right col-lg-5">
+          <img class="img-fluid d-block mx-auto m-0" src="img/primera-s.png" style=""> </div>
+      </div>
+    </div>
+  </div>
+  <!-- Features -->
+  <div class="py-5 h-100" id="features" style="	background-image: url(img/bg2dark.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+    <div class="container h-100">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2 class="pb-4">HPE Flash Portfolio</h2>
+        </div>
+      </div>
+      <div class="row w-100 h-75" style="	background-image: url(img/primary.png);	background-position: inline;	background-size: 100%;	background-repeat: no-repeat;"></div>
+    </div>
+  </div>
+  <div class="py-5 h-100" id="features" style="	background-image: url(img/bg3dark.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+    <div class="container h-100">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2 class="pb-4">Redefine Data Protection</h2>
+        </div>
+      </div>
+      <div class="row w-100 h-75" style="	background-image: url(img/secondary.png);	background-position: inline;	background-size: 100%;	background-repeat: no-repeat;"></div>
+    </div>
+  </div>
+  <!-- Features -->
+  <!-- Carousel reviews -->
+  <!-- Call to action -->
+  <!-- Footer -->
+  <div class="py-5 bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <p class="lead">Sign up to our newsletter for the latest news</p>
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Your e-mail here"> </div>
+            <button type="submit" class="btn ml-2 btn-outline-primary">Subscribe</button>
+          </form>
+        </div>
+        <div class="col-4 col-md-1 align-self-center my-3">
+          <a href="https://www.facebook.com" target="blank"><i class="fa fa-fw fa-facebook fa-3x text-white"></i></a>
+        </div>
+        <div class="col-4 col-md-1 align-self-center my-3">
+          <a href="https://twitter.com" target="blank"><i class="fa fa-fw fa-twitter fa-3x text-white"></i></a>
+        </div>
+        <div class="col-4 col-md-1 align-self-center my-3">
+          <a href="https://www.instagram.com" target="blank"><i class="fa fa-fw fa-instagram fa-3x text-white"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 my-3 text-center">
+          <p class="text-muted" contenteditable="true">© Warot Asawakowitkorn</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- JavaScript dependencies -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- Script: Smooth scrolling between anchors in the same page -->
+  <script src="js/smooth-scroll.js" style=""></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+</body>
+
+</html>

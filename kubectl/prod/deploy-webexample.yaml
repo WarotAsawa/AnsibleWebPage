@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: web-app
+  name: web-app
+  namespace: tiny-tenant
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: web-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: web-app
+    spec:
+      containers:
+      - env:
+        - name: DOMAIN
+          value: namespace
+        image: asawakow/webexample
+        imagePullPolicy: Always
+        name: web-app
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
