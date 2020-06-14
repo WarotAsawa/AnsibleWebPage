@@ -1,5 +1,5 @@
 pipeline {
-   /*
+	/*
 	Prepare: Pull Code from Git (dev banch), build temp docker image. 
 	Test: Test code on Docker and if pass
 	Result: IF Pass then merge code to master, go to BUILD.
@@ -7,81 +7,84 @@ pipeline {
 	Build: build production docker image. Push new image to hub
 	Deploy: kubectl apply changed deployment
 	*/
-   	agent { label 'dev-node'}
 
-   	stages {
-      	stage('Prepare Test') {
-         	steps {
-            	dir('/root/dev/AnsibleWebPage') {
-            	    echo "Git Check out to Branch: dev"
-            	    sh "git checkout dev"
-            	    echo "Pull latest code from WarotAsawa/AnsibleWebPage Branch: dev"
-            	    sh "git pull"
-            	}
-         	}
-      	}
-      	stage('Build Test') {
-         	steps {
-            	dir('/root/dev/AnsibleWebPage') {
-            	    echo "Building temp docker image"
-            	    sh "docker build -t temp-frond-end ."
-            	}
-         	}
-      	}
-      	stage('Run Test') {
-      	   	steps {
-      	   	   	dir('/root/dev/AnsibleWebPage') {
-      	   	       	echo "Running temp docker image with port 8888"
-      	   	       	sh "docker run --name tempweb -d -p 8888:80 temp-front-end"
-      	   	       	retry(3) {
-      	   	        	echo "Test web connectivity"
-      	   	        	sh "curl -I 172.30.5.133:8888"
-      	   	       	}
-      	   	       	echo "Test Pass. Cleaning up containers"
-      	   	       	sh "docker stop tempweb"
-      	   	       	sh "docker rm tempweb"
-      	   	   	}
-      	   	}
-      	}
-      	stage('Build Prod') {
-      	   	steps {
-      	      	dir('/root/dev/AnsibleWebPage') {
-      	          	echo "Merge to master and push"
-      	          	sh "git checkout master"
-      	          	sh "git merge dev"
-      	          	sh "git push"
-      	          	echo "Checkout git back to dev branch"
-      	          	sh "git checkout dev"
-      	          	echo "Building production docker image"
-      	          	sh "docker build -t front-cover-web ."
-      	          	echo "Tagging image and push to docker.hub"
-      	          	sh "docker tag front-cover-web:latest asawakow/front-cover-web:latest"
-      	          	sh "docker push asawakow/front-cover-web:latest"
-      	      	}
-      	   	}
-      	}
-      	stage('Deploy Prod on k8s') {
-      	   	steps {
-      	      	dir('/root/dev/AnsibleWebPage/kubectl/prod') {
-      	          	echo "Sleep 15s for docker hub to ready"
-      	          	sleep 15s
-      	          	echo "Re-deployging Web-App"
-      	          	sh "kubectl delete -f deploy-webexample.yaml"
-      	          	sh "kubectl apply -f deploy-webexample.yaml"
-      	          	echo "Applying Services"
-      	          	sh "kubectl apply -f svc-webexample.yaml"
-      	      	}
-      	   	}
-      	}
-      	stage('Verify deployment') {
-      	   steps {
-      	        retry(3) {
-					sleep 5s
-      	            echo "Test web connectivity"
-      	            sh "curl -I http://nanju-hcp-gw.hpe.lab:10028/"
-      	        }
-      	        echo "Test Pass. All Done"
-      	    }
-      	}
-   	}
+	//Run only on dev-node slave
+	agent { label 'dev-node'}
+
+	stages {
+		stage('Prepare Test') {
+			steps {
+				echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+				dir('/root/dev/AnsibleWebPage') {
+					echo "Git Check out to Branch: dev"
+					sh "git checkout dev"
+					echo "Pull latest code from WarotAsawa/AnsibleWebPage Branch: dev"
+					sh "git pull"
+				}
+			}
+		}
+		stage('Build Test') {
+			steps {
+				dir('/root/dev/AnsibleWebPage') {
+					echo "Building temp docker image"
+					sh "docker build -t temp-frond-end ."
+				}
+			}
+		}
+		stage('Run Test') {
+			steps {
+				dir('/root/dev/AnsibleWebPage') {
+					echo "Running temp docker image with port 8888"
+					sh "docker run --name tempweb -d -p 8888:80 temp-front-end"
+					retry(3) {
+						echo "Test web connectivity"
+						sh "curl -I 172.30.5.133:8888"
+					}
+					echo "Test Pass. Cleaning up containers"
+					sh "docker stop tempweb"
+					sh "docker rm tempweb"
+				}
+			}
+		}
+		stage('Build Prod') {
+			steps {
+				dir('/root/dev/AnsibleWebPage') {
+					echo "Merge to master and push"
+					sh "git checkout master"
+					sh "git merge dev"
+					sh "git push"
+					echo "Checkout git back to dev branch"
+					sh "git checkout dev"
+					echo "Building production docker image"
+					sh "docker build -t front-cover-web ."
+					echo "Tagging image and push to docker.hub"
+					sh "docker tag front-cover-web:latest asawakow/front-cover-web:latest"
+					sh "docker push asawakow/front-cover-web:latest"
+				}
+			}
+		}
+		stage('Deploy Prod on k8s') {
+			steps {
+				dir('/root/dev/AnsibleWebPage/kubectl/prod') {
+					echo "Sleep 15s for docker hub to ready"
+					sleep(time: 15, unit: "SECONDS")
+					echo "Re-deployging Web-App"
+					sh "kubectl delete -f deploy-webexample.yaml"
+					sh "kubectl apply -f deploy-webexample.yaml"
+					echo "Applying Services"
+					sh "kubectl apply -f svc-webexample.yaml"
+				}
+			}
+		}
+		stage('Verify deployment') {
+			steps {
+				retry(3) {
+					sleep(time: 5, unit: "SECONDS")
+					echo "Test web connectivity"
+					sh "curl -I http://nanju-hcp-gw.hpe.lab:10028/"
+				}
+			}
+			echo "Test Pass. All Done"
+		}
+	}
 }
