@@ -83,8 +83,8 @@ pipeline {
 					echo "Test web connectivity"
 					sh "curl -I http://nanju-hcp-gw.hpe.lab:10028/"
 				}
+				echo "Test Pass. All Done"
 			}
-			echo "Test Pass. All Done"
 		}
 	}
 }
