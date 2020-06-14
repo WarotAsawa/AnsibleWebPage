@@ -12,7 +12,7 @@ pipeline {
             }
          }
       }
-      stage('Builing Test') {
+      stage('Build Test') {
          steps {
             dir('/root/dev/AnsibleWebPage') {
                 echo "Building temp docker image"
@@ -20,7 +20,7 @@ pipeline {
             }
          }
       }
-      stage('Run and Test') {
+      stage('Run Test') {
          steps {
             dir('/root/dev/AnsibleWebPage') {
                 echo "Running temp docker image with port 8888"
@@ -35,7 +35,7 @@ pipeline {
             }
          }
       }
-      stage('Build and Push Production') {
+      stage('Build Prod') {
          steps {
             dir('/root/dev/AnsibleWebPage') {
                 echo "Merge to master and push"
@@ -52,14 +52,27 @@ pipeline {
             }
          }
       }
-      stage('Deploy Production on k8s') {
+      stage('Deploy Prod on k8s') {
          steps {
             dir('/root/dev/AnsibleWebPage/kubectl/prod') {
+                echo "Sleep 15s for docker hub to ready"
+                sleep 15s
                 echo "Re-deployging Web-App"
                 sh "kubectl delete -f deploy-webexample.yaml"
                 sh "kubectl apply -f deploy-webexample.yaml"
                 echo "Applying Services"
                 sh "kubectl apply -f svc-webexample.yaml"
+            }
+         }
+      }
+      stage('Verify deployment') {
+         steps {
+                retry(3) {
+                    sleep 5s
+                    echo "Test web connectivity"
+                    sh "curl -I http://nanju-hcp-gw.hpe.lab:10028/"
+                }
+                echo "Test Pass. All Done"
             }
          }
       }
