@@ -1,5 +1,5 @@
 pipeline {
-   	/*
+   /*
 	Prepare: Pull Code from Git (dev banch), build temp docker image. 
 	Test: Test code on Docker and if pass
 	Result: IF Pass then merge code to master, go to BUILD.
@@ -7,18 +7,12 @@ pipeline {
 	Build: build production docker image. Push new image to hub
 	Deploy: kubectl apply changed deployment
 	*/
-	//Variable Declaration
-	def testURL = "localhost:8888"
-	def prodURL = 'http://nanju-hcp-gw.hpe.lab:10028/'
-
-   	//Select agent with label dev-node
    	agent { label 'dev-node'}
 
    	stages {
       	stage('Prepare Test') {
          	steps {
             	dir('/root/dev/AnsibleWebPage') {
-            		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             	    echo "Git Check out to Branch: dev"
             	    sh "git checkout dev"
             	    echo "Pull latest code from WarotAsawa/AnsibleWebPage Branch: dev"
@@ -41,7 +35,7 @@ pipeline {
       	   	       	sh "docker run --name tempweb -d -p 8888:80 temp-front-end"
       	   	       	retry(3) {
       	   	        	echo "Test web connectivity"
-      	   	        	sh "curl -I ${testURL}"
+      	   	        	sh "curl -I 172.30.5.133:8888"
       	   	       	}
       	   	       	echo "Test Pass. Cleaning up containers"
       	   	       	sh "docker stop tempweb"
@@ -70,7 +64,7 @@ pipeline {
       	   	steps {
       	      	dir('/root/dev/AnsibleWebPage/kubectl/prod') {
       	          	echo "Sleep 15s for docker hub to ready"
-      	          	sleep(time: 15, unit: "SECONDS")
+      	          	sleep 15s
       	          	echo "Re-deployging Web-App"
       	          	sh "kubectl delete -f deploy-webexample.yaml"
       	          	sh "kubectl apply -f deploy-webexample.yaml"
@@ -82,9 +76,9 @@ pipeline {
       	stage('Verify deployment') {
       	   steps {
       	        retry(3) {
-					sleep(time: 5, unit: "SECONDS")
+					sleep 5s
       	            echo "Test web connectivity"
-      	            sh "curl -I ${prodURL}"
+      	            sh "curl -I http://nanju-hcp-gw.hpe.lab:10028/"
       	        }
       	        echo "Test Pass. All Done"
       	    }
