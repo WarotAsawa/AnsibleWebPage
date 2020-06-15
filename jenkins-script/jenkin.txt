@@ -27,7 +27,7 @@ pipeline {
 			steps {
 				dir('/root/dev/AnsibleWebPage') {
 					echo "Building temp docker image"
-					sh "docker build -t temp-frond-end ."
+					sh "docker build -t temp-front-end:latest ."
 				}
 			}
 		}
@@ -35,7 +35,7 @@ pipeline {
 			steps {
 				dir('/root/dev/AnsibleWebPage') {
 					echo "Running temp docker image with port 8888"
-					sh "docker run --name tempweb -d -p 8888:80 temp-front-end"
+					sh "docker run --name tempweb -d -p 8888:80 temp-front-end:latest"
 					retry(3) {
 						echo "Test web connectivity"
 						sh "curl -I 172.30.5.133:8888"
@@ -56,7 +56,7 @@ pipeline {
 					echo "Checkout git back to dev branch"
 					sh "git checkout dev"
 					echo "Building production docker image"
-					sh "docker build -t front-cover-web ."
+					sh "docker build -t front-cover-web:latest ."
 					echo "Tagging image and push to docker.hub"
 					sh "docker tag front-cover-web:latest asawakow/front-cover-web:latest"
 					sh "docker push asawakow/front-cover-web:latest"
