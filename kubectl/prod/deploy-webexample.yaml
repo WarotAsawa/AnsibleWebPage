@@ -24,7 +24,7 @@ spec:
       - env:
         - name: DOMAIN
           value: namespace
-        image: asawakow/webexample
+        image: asawakow/front-cover-web
         imagePullPolicy: Always
         name: web-app
         ports:
